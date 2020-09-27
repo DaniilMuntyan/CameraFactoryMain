@@ -13,5 +13,5 @@ import java.util.UUID;
 public final class AssembleLensDTO {
     private UUID collectorId;
     private Integer focalLength;
-        private LensType lensType;
+    private LensType lensType;
 }

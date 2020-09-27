@@ -3,31 +3,57 @@ package controllers.models;
 import controllers.EndPoints;
 import controllers.GlobalVariables;
 import entities.machines.Calibrator;
+import entities.machines.Machine;
 import entities.machines.Packer;
 import entities.machines.Tester;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 public final class MachineController {
 
     public Calibrator createCalibrator(String name) {
         Calibrator calibrator = new Calibrator(name);
-        ResponseEntity<Calibrator> calibratorResponseEntity = GlobalVariables.restTemplate
-                .postForEntity(EndPoints.CREATE_CALIBRATOR, calibrator, Calibrator.class);
-        return calibratorResponseEntity.getBody();
+        return this.createMachine(EndPoints.CREATE_CALIBRATOR, calibrator, Calibrator.class);
     }
 
     public Packer createPacker(String name) {
         Packer packer = new Packer(name);
-        ResponseEntity<Packer> packerResponseEntity = GlobalVariables.restTemplate
-                .postForEntity(EndPoints.CREATE_PACKER, packer, Packer.class);
-        return packerResponseEntity.getBody();
+        return this.createMachine(EndPoints.CREATE_PACKER, packer, Packer.class);
     }
 
     public Tester createTester(String name) {
         Tester tester = new Tester(name);
-        ResponseEntity<Tester> testerResponseEntity = GlobalVariables.restTemplate
-                .postForEntity(EndPoints.CREATE_TESTER, tester, Tester.class);
-        return testerResponseEntity.getBody();
+        return this.createMachine(EndPoints.CREATE_TESTER, tester, Tester.class);
+    }
+
+    public List<Calibrator> getAllCalibrators() {
+        ResponseEntity<List<Calibrator>> responseEntity = GlobalVariables.restTemplate
+                .exchange(EndPoints.GET_ALL_COLLECTORS, HttpMethod.GET, GlobalVariables.headersEntity,
+                        new ParameterizedTypeReference<List<Calibrator>>(){});
+        return responseEntity.getBody();
+    }
+
+    public List<Packer> getAllPackers() {
+        ResponseEntity<List<Packer>> responseEntity = GlobalVariables.restTemplate
+                .exchange(EndPoints.GET_ALL_PACKERS, HttpMethod.GET, GlobalVariables.headersEntity,
+                        new ParameterizedTypeReference<List<Packer>>(){});
+        return responseEntity.getBody();
+    }
+
+    public List<Tester> getAllTesters() {
+        ResponseEntity<List<Tester>> responseEntity = GlobalVariables.restTemplate
+                .exchange(EndPoints.GET_ALL_TESTERS, HttpMethod.GET, GlobalVariables.headersEntity,
+                        new ParameterizedTypeReference<List<Tester>>(){});
+        return responseEntity.getBody();
+    }
+
+    private <T extends Machine> T createMachine(String endpoint, T newMachine, Class<T> response) {
+        ResponseEntity<T> machineResponseEntity = GlobalVariables.restTemplate
+                .postForEntity(endpoint, newMachine, response);
+        return machineResponseEntity.getBody();
     }
 
 }

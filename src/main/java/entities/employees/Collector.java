@@ -33,6 +33,6 @@ public final class Collector extends Employee {
 
     @Override
     public String toString() {
-        return "Collector " +  getName() + " " + getSurname() + "\nID: " +  getId() + "\nPhone number: " + getPhone();
+        return "Collector " +  getName() + " " + getSurname() + ", id: " +  getId() + ", phone: " + getPhone();
     }
 }

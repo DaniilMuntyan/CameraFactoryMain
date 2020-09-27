@@ -11,19 +11,11 @@ import entities.employees.Collector;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 
-import java.util.UUID;
-
 public final class AssembleController {
-    private UUID colectorId;
 
-    public AssembleController() {}
-
-    public AssembleController(Collector collector) {
-        this.colectorId = collector.getId();
-    }
-
-    public CameraBack assembleCameraBack(Dimensions dimensions, Integer resolution, Integer colorDepth) {
-        AssembleBackDTO cameraBackDTO = new AssembleBackDTO(this.colectorId, dimensions, resolution, colorDepth);
+    public CameraBack assembleCameraBack(Collector collector, Dimensions dimensions, Integer resolution,
+                                         Integer colorDepth) {
+        AssembleBackDTO cameraBackDTO = new AssembleBackDTO(collector.getId(), dimensions, resolution, colorDepth);
 
         HttpEntity<AssembleBackDTO> assembleBack = new HttpEntity<>(cameraBackDTO);
 
@@ -33,8 +25,8 @@ public final class AssembleController {
         return assembleBackResponseEntity.getBody();
     }
 
-    public CameraBody assembleCameraBody(Dimensions dimensions, String color) {
-        AssembleBodyDTO cameraBodyDTO = new AssembleBodyDTO(this.colectorId, dimensions, color);
+    public CameraBody assembleCameraBody(Collector collector, Dimensions dimensions, String color) {
+        AssembleBodyDTO cameraBodyDTO = new AssembleBodyDTO(collector.getId(), dimensions, color);
 
         HttpEntity<AssembleBodyDTO> assembleBody = new HttpEntity<>(cameraBodyDTO);
 
@@ -44,8 +36,8 @@ public final class AssembleController {
         return cameraBodyResponseEntity.getBody();
     }
 
-    public CameraLens assembleCameraLens(Integer focalLength, LensType lensType) {
-        AssembleLensDTO cameraLensDTO = new AssembleLensDTO(this.colectorId, focalLength, lensType);
+    public CameraLens assembleCameraLens(Collector collector, Integer focalLength, LensType lensType) {
+        AssembleLensDTO cameraLensDTO = new AssembleLensDTO(collector.getId(), focalLength, lensType);
 
         HttpEntity<AssembleLensDTO> assembleLens = new HttpEntity<>(cameraLensDTO);
 
@@ -55,8 +47,8 @@ public final class AssembleController {
         return cameraLensResponseEntity.getBody();
     }
 
-    public Camera assembleCamera(CameraBack cameraBack, CameraBody cameraBody, CameraLens cameraLens) {
-        AssembleCameraDTO cameraDTO = new AssembleCameraDTO(this.colectorId, cameraBack.getId(),
+    public Camera assembleCamera(Collector collector, CameraBack cameraBack, CameraBody cameraBody, CameraLens cameraLens) {
+        AssembleCameraDTO cameraDTO = new AssembleCameraDTO(collector.getId(), cameraBack.getId(),
                 cameraBody.getId(), cameraLens.getId());
 
         HttpEntity<AssembleCameraDTO> assembleCamera = new HttpEntity<>(cameraDTO);

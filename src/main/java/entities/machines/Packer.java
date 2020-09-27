@@ -1,6 +1,5 @@
 package entities.machines;
 
-import entities.camera.Camera;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -16,7 +15,7 @@ public final class Packer extends Machine {
 
     @Override
     public String toString() {
-        return "Packing machine id: " + getId() + "\nName: " + getName();
+        return "Packing machine id: " + getId() + ", name: " + getName();
     }
 
 }

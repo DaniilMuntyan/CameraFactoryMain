@@ -20,7 +20,7 @@ public final class CameraBody {
 
     @Override
     public String toString() {
-        return "Camera body id: " + id + "\nDimensions: " + dimensions + "\nColor: " + color;
+        return "Camera body id: " + id + ", dimensions: " + dimensions + ", color: " + color;
     }
 
 }

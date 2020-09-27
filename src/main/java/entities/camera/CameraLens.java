@@ -20,6 +20,6 @@ public final class CameraLens {
 
     @Override
     public String toString() {
-        return "Camera lens id: " + id + "\n" + "Focal length: " + focalLength + " mm\nLens type: " + lensType;
+        return "Camera lens id: " + id + ", focal length: " + focalLength + " mm, lens type: " + lensType;
     }
 }

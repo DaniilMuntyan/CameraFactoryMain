@@ -16,6 +16,19 @@ public class EndPoints {
     public static final String CREATE_PACKER = URL + "/api/packers";
     public static final String CREATE_TESTER = URL + "/api/testers";
 
+    public static final String GET_ALL_BACKS = URL + "/api/backs";
+    public static final String GET_ALL_BODIES = URL + "/api/bodies";
+    public static final String GET_ALL_LENS = URL + "/api/lens";
+    public static final String GET_ALL_CAMERAS = URL + "/api/cameras";
+
+    public static final String GET_ALL_MANAGERS = URL + "/api/managers";
+    public static final String GET_ALL_COLLECTORS = URL + "/api/collectors";
+    public static final String GET_ALL_TECHNICIANS = URL + "/api/technicians";
+
+    public static final String GET_ALL_CALIBRATORS = URL + "/api/calibrators";
+    public static final String GET_ALL_TESTERS = URL + "/api/testers";
+    public static final String GET_ALL_PACKERS = URL + "/api/packers";
+
     public static final String CALIBRATE_CAMERA = URL + "/api/calibrate";
     public static final String TESTING = URL + "/api/test";
     public static final String ORDER = URL + "/api/order";

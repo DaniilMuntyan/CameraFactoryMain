@@ -28,12 +28,13 @@ public final class Camera {
 
     @Override
     public String toString() {
-        String packing = isPacked ? "Packed" : "Unpacked";
+        String packing = isPacked ? "packed" : "unpacked";
         String flashing = isFirmware ? "flashed" : "unflashed";
         String cleaning = isWipedClean ? "wiped" : "not wiped";
+        String rejected = isRejected ? "rejected": "not rejected";
+        String gap = "\n\t\t\t";
 
-        String string = (packing + ", "  + cleaning + ", " +  flashing + " camera " + camera_id + "\n" + cameraBack + "\n" +
-                cameraBody + "\n" + cameraLens);
-        return string;
+        return "Camera id: " + camera_id + ", " + rejected + ", " + packing + ", "  + cleaning + ", " +  flashing +
+                gap + cameraBack + gap + cameraBody + gap + cameraLens;
     }
 }

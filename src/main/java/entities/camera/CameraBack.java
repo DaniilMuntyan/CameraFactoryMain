@@ -23,8 +23,7 @@ public final class CameraBack {
 
     @Override
     public String toString() {
-        Dimensions dim = new Dimensions();
-        return "Camera back id: " + id + "\nDimensions: " + dimensions + "\nResolution: " + resolution +
-                " MP\nColor depth: " + colorDepth + " bpp";
+        return "Camera back id: " + id + ", dimensions: " + dimensions + ", resolution: " + resolution +
+                " MP, color depth: " + colorDepth + " bpp";
     }
 }
