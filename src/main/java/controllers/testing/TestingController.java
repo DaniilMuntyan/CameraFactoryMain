@@ -29,5 +29,4 @@ public final class TestingController {
 
         return cameraResponseEntity.getBody();
     }
-
 }

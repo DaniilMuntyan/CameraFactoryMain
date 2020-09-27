@@ -32,5 +32,4 @@ public final class FinalStageController {
 
         return cameraResponseEntity.getBody();
     }
-
 }

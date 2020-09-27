@@ -17,5 +17,4 @@ public final class Packer extends Machine {
     public String toString() {
         return "Packing machine id: " + getId() + ", name: " + getName();
     }
-
 }

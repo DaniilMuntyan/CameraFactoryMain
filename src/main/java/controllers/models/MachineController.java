@@ -31,7 +31,7 @@ public final class MachineController {
 
     public List<Calibrator> getAllCalibrators() {
         ResponseEntity<List<Calibrator>> responseEntity = GlobalVariables.restTemplate
-                .exchange(EndPoints.GET_ALL_COLLECTORS, HttpMethod.GET, GlobalVariables.headersEntity,
+                .exchange(EndPoints.GET_ALL_CALIBRATORS, HttpMethod.GET, GlobalVariables.headersEntity,
                         new ParameterizedTypeReference<List<Calibrator>>(){});
         return responseEntity.getBody();
     }
@@ -55,5 +55,4 @@ public final class MachineController {
                 .postForEntity(endpoint, newMachine, response);
         return machineResponseEntity.getBody();
     }
-
 }

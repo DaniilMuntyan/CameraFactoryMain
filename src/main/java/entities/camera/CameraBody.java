@@ -22,5 +22,4 @@ public final class CameraBody {
     public String toString() {
         return "Camera body id: " + id + ", dimensions: " + dimensions + ", color: " + color;
     }
-
 }

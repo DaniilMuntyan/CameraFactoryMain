@@ -14,26 +14,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class InputDataHandler {
+public final class InputDataHandler {
     private final DataForTesting dataForTesting;
     private final Random rand = new Random();
 
     public InputDataHandler() {
         this.dataForTesting = new DataForTesting();
         initializeEntities(dataForTesting);
-    }
-
-    public List<String> getPhones() {
-        List<String> listNumbers = new ArrayList<>();
-        for(int i = 0; i < 100; ++i) {
-            int n1 = rand.nextInt(7) + 1;
-            int n2 = rand.nextInt(8);
-            int n3 = rand.nextInt(8);
-            int set2 = rand.nextInt(899) + 100;
-            int set3 = rand.nextInt(8999) + 1000;
-            listNumbers.add("(" + n1 + n2 + n3 + ")" + "-" + set2 + "-" + set3);
-        }
-        return listNumbers;
     }
 
     public List<String> getListFromFile(String fileName) {
@@ -53,6 +40,22 @@ public class InputDataHandler {
         }
     }
 
+    public List<String> getNameSurnamePhone(DataForTesting dataForTesting) {
+        String name = getRandomFromList(dataForTesting.names);
+        String surname = getRandomFromList(dataForTesting.surnames);
+        String phone = getRandomFromList(dataForTesting.phones);
+
+        return new ArrayList<>(Arrays.asList(name, surname, phone));
+    }
+
+    public String getRandomColor() {
+        return this.getRandomFromList(this.dataForTesting.colors);
+    }
+
+    public LensType getRandomLens() {
+        return this.getRandomFromList(Arrays.asList(LensType.values()));
+    }
+
     public Dimensions getRandomDimensions() {
         // From 16 to 26 (standard, described in tester.checkDimensions: 25)
         Integer width = 16 + rand.nextInt(10);
@@ -68,14 +71,6 @@ public class InputDataHandler {
 
     public <T> T getRandomFromList(List<T> list) {
         return list.get(rand.nextInt(list.size()));
-    }
-
-    public List<String> getNameSurnamePhone(DataForTesting dataForTesting) {
-        String name = getRandomFromList(dataForTesting.names);
-        String surname = getRandomFromList(dataForTesting.surnames);
-        String phone = getRandomFromList(dataForTesting.phones);
-
-        return new ArrayList<>(Arrays.asList(name, surname, phone));
     }
 
     public void initializeEntities(DataForTesting dataForTesting){
@@ -121,16 +116,17 @@ public class InputDataHandler {
         }
     }
 
-    public String getRandomColor() {
-        return this.getRandomFromList(this.dataForTesting.colors);
-    }
-
-    public LensType getRandomLens() {
-        return this.getRandomFromList(Arrays.asList(LensType.values()));
-    }
-
-    public String getRandomRobotName() {
-        return this.getRandomFromList(this.dataForTesting.robots);
+    public List<String> getPhones() {
+        List<String> listNumbers = new ArrayList<>();
+        for(int i = 0; i < 100; ++i) {
+            int n1 = rand.nextInt(7) + 1;
+            int n2 = rand.nextInt(8);
+            int n3 = rand.nextInt(8);
+            int set2 = rand.nextInt(899) + 100;
+            int set3 = rand.nextInt(8999) + 1000;
+            listNumbers.add("(" + n1 + n2 + n3 + ")" + "-" + set2 + "-" + set3);
+        }
+        return listNumbers;
     }
 
     public final class DataForTesting {

@@ -1,7 +1,6 @@
 import controllers.assembling.AssembleController;
 import controllers.calibration.CalibrationController;
 import controllers.final_stage.FinalStageController;
-import controllers.models.CameraController;
 import controllers.models.EmployeeController;
 import controllers.models.MachineController;
 import controllers.ordering.OrderController;
@@ -21,7 +20,6 @@ import java.util.List;
 import java.util.Random;
 
 public final class ProductLifecycle {
-
     private final InputDataHandler inputDataHandler;
     private final Random rand;
 
@@ -66,10 +64,9 @@ public final class ProductLifecycle {
 
     public Camera calibrating(Camera camera) {
         MachineController machineController = new MachineController();
-        CameraController cameraController = new CameraController();
 
-        String name = inputDataHandler.getRandomRobotName();
-        Machine calibrator = machineController.createCalibrator(name);
+        List<Calibrator> calibrators = machineController.getAllCalibrators();
+        Machine calibrator = inputDataHandler.getRandomFromList(calibrators);
 
         CalibrationController calibrationController = new CalibrationController((Calibrator) calibrator);
         Camera newCamera = calibrationController.calibrateCamera(camera);
@@ -79,20 +76,20 @@ public final class ProductLifecycle {
     }
 
     public Camera testing(Camera camera) {
-        CameraController cameraController = new CameraController();
         MachineController machineController = new MachineController();
         EmployeeController employeeController = new EmployeeController();
 
-        Machine tester = machineController.createTester(inputDataHandler.getRandomRobotName());
+        List<Tester> testers = machineController.getAllTesters();
+        Machine tester = inputDataHandler.getRandomFromList(testers);
 
         List<Technician> technicians = employeeController.getAllTechnicians();
         Employee technician = inputDataHandler.getRandomFromList(technicians);
 
         TestingController testingController = new TestingController((Tester) tester, (Technician) technician);
-        testingController.test(camera);
+        Camera testedCamera = testingController.test(camera);
         System.out.println("TESTED " + camera);
 
-        return camera;
+        return testedCamera;
     }
 
     public Camera finalStage(Camera camera) {
@@ -110,9 +107,10 @@ public final class ProductLifecycle {
         FinalStageController finalStageController =
                 new FinalStageController((Technician) technician, (Manager) manager, (Packer) packer);
 
-        finalStageController.finalStage(camera);
+        Camera finalCamera = finalStageController.finalStage(camera);
         System.out.println("FINAL STAGE " + camera);
-        return camera;
+
+        return finalCamera;
     }
 
     public void ordering() {

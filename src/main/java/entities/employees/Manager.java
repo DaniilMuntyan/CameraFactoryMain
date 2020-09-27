@@ -20,7 +20,7 @@ public final class Manager extends Employee {
         this.defects = new ArrayList<>();
     }
 
-    public String getDefectList() {
+    private String getDefectList() {
         String detailsToAdd = "[";
         for (Camera camera: defects) {
             if (defects.indexOf(camera) < defects.size() - 1)
@@ -36,5 +36,4 @@ public final class Manager extends Employee {
         return "Manager " + getName() + " " + getSurname() + ", id: " +  getId() + ", phone: " + getPhone() +
                 ", details to order: " + (defects.size() > 0 ? getDefectList() : "[]");
     }
-
 }

@@ -13,8 +13,8 @@ import org.springframework.http.ResponseEntity;
 
 public final class AssembleController {
 
-    public CameraBack assembleCameraBack(Collector collector, Dimensions dimensions, Integer resolution,
-                                         Integer colorDepth) {
+    public CameraBack assembleCameraBack(Collector collector, Dimensions dimensions,
+                                         Integer resolution, Integer colorDepth) {
         AssembleBackDTO cameraBackDTO = new AssembleBackDTO(collector.getId(), dimensions, resolution, colorDepth);
 
         HttpEntity<AssembleBackDTO> assembleBack = new HttpEntity<>(cameraBackDTO);
@@ -47,7 +47,8 @@ public final class AssembleController {
         return cameraLensResponseEntity.getBody();
     }
 
-    public Camera assembleCamera(Collector collector, CameraBack cameraBack, CameraBody cameraBody, CameraLens cameraLens) {
+    public Camera assembleCamera(Collector collector, CameraBack cameraBack,
+                                 CameraBody cameraBody, CameraLens cameraLens) {
         AssembleCameraDTO cameraDTO = new AssembleCameraDTO(collector.getId(), cameraBack.getId(),
                 cameraBody.getId(), cameraLens.getId());
 
@@ -58,5 +59,4 @@ public final class AssembleController {
 
         return cameraResponseEntity.getBody();
     }
-
 }

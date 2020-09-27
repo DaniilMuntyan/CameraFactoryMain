@@ -17,5 +17,4 @@ public final class Tester extends Machine {
     public String toString() {
         return "Test machine id: " + getId() + ", name: " + getName();
     }
-
 }

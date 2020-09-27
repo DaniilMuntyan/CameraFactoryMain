@@ -24,6 +24,7 @@ public final class CameraBack {
     @Override
     public String toString() {
         return "Camera back id: " + id + ", dimensions: " + dimensions + ", resolution: " + resolution +
-                " MP, color depth: " + colorDepth + " bpp";
+                " MP, color depth: " + colorDepth + " bpp" + ", matrix check: " + matrixCheck +
+                (camera != null ? camera.getCamera_id() : "");
     }
 }

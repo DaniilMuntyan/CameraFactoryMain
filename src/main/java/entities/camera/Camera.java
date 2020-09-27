@@ -35,6 +35,6 @@ public final class Camera {
         String gap = "\n\t\t\t";
 
         return "Camera id: " + camera_id + ", " + rejected + ", " + packing + ", "  + cleaning + ", " +  flashing +
-                gap + cameraBack + gap + cameraBody + gap + cameraLens;
+                gap + cameraBack + gap + cameraBody + gap + cameraLens + (manager != null ? gap + manager : "");
     }
 }

@@ -1,7 +1,7 @@
 package controllers;
 
-public class EndPoints {
-    public static final String URL = "http://localhost:8080";
+public final class EndPoints {
+    private static final String URL = "http://localhost:8080";
 
     public static final String ASSEMBLE_CAMERA_BACK = URL + "/api/assemble/camera_back";
     public static final String ASSEMBLE_CAMERA_BODY = URL + "/api/assemble/camera_body";
@@ -33,6 +33,4 @@ public class EndPoints {
     public static final String TESTING = URL + "/api/test";
     public static final String ORDER = URL + "/api/order";
     public static final String FINAL_STAGE = URL + "/api/final_stage";
-
-
 }
