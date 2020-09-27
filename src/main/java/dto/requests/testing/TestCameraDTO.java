@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-public class TestCameraDTO {
+public final class TestCameraDTO {
     private UUID testerId;
     private UUID technicianId;
     private UUID cameraId;
