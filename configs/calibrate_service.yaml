@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service 
+metadata:
+    name: calibrate-service
+    labels:
+      env                : prod
+      owner              : Muntian
+      io.kompose.service : calibrating-svc
+spec:
+    selector:
+        io.kompose.service: calibrating-svc
+    ports:
+        - name       : "8082"
+          #protocol: TCP
+          port       : 8082
+          targetPort : 8080
+        - name       : "5432"
+          #protocol: TCP
+          port       : 5432
+          targetPort : 5432
+    type: ClusterIP

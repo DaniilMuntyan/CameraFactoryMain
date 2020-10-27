@@ -32,9 +32,10 @@ public final class Camera {
         String flashing = isFirmware ? "flashed" : "unflashed";
         String cleaning = isWipedClean ? "wiped" : "not wiped";
         String rejected = isRejected ? "rejected": "not rejected";
-        String gap = "\n\t\t\t";
+        String gap = "\n\t";
 
         return "Camera id: " + camera_id + ", " + rejected + ", " + packing + ", "  + cleaning + ", " +  flashing +
-                gap + cameraBack + gap + cameraBody + gap + cameraLens + (manager != null ? gap + manager : "");
+                ((innerInfo != null && innerInfo.length() > 0) ? "\n" + innerInfo + gap : gap) + cameraBack + gap +
+                cameraBody + gap + cameraLens + (manager != null ? gap + manager : "");
     }
 }

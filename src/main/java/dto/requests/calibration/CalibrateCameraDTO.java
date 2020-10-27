@@ -1,5 +1,6 @@
 package dto.requests.calibration;
 
+import entities.camera.Camera;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -9,5 +10,5 @@ import java.util.UUID;
 @AllArgsConstructor
 public final class CalibrateCameraDTO {
     private UUID calibratorId;
-    private UUID cameraId;
+    private Camera camera;
 }

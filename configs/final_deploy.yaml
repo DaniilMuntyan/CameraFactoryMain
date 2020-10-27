@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: final-pod
+    labels:
+        io.kompose.service: final-svc
+        app   : final-stage
+        end   : prod
+        owner : DaniilMuntian
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            io.kompose.service: final-svc
+    template:
+        metadata:
+            labels:
+                io.kompose.network/back: "true"
+                io.kompose.service: final-svc
+        spec:
+            containers:
+                - name  : final-app
+                  image : muntian/final:latest
+                  ports :
+                    - containerPort: 8080
+                  imagePullPolicy: "Always"
+                  
+                - name  : final-db
+                  image : postgres:latest
+                  ports :
+                    - containerPort: 5432
+                  env:
+                    - name: "POSTGRES_PASSWORD"
+                      value: "postgres"
+                    - name: "POSTGRES_USER"
+                      value: "postgres"
+                    - name: "POSTGRES_DB"
+                      value: "finaldb"
+                      
+            restartPolicy: Always

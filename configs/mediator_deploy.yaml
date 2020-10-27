@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: mediator-pod
+    labels:
+        io.kompose.service: med-svc
+        app   : mediator
+        end   : prod
+        owner : DaniilMuntian
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            io.kompose.service: med-svc
+    template:
+        metadata:
+            labels:
+                io.kompose.network/back: "true"
+                io.kompose.service: med-svc
+        spec:
+            containers:
+                - name  : mediator-app
+                  image : muntian/mediator:latest
+                  ports :
+                    - containerPort: 8080
+                  imagePullPolicy: "Always"
+                      
+            restartPolicy: Always

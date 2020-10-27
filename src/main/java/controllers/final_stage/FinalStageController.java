@@ -22,8 +22,7 @@ public final class FinalStageController {
     }
 
     public Camera finalStage(Camera camera) {
-        FinalCheckDTO finalCheckDTO = new FinalCheckDTO(technician.getId(), packer.getId(), manager.getId(),
-                camera.getCamera_id());
+        FinalCheckDTO finalCheckDTO = new FinalCheckDTO(technician.getId(), packer.getId(), manager.getId(), camera);
 
         HttpEntity<FinalCheckDTO> finalCheckDTOHttpEntity = new HttpEntity<>(finalCheckDTO);
 

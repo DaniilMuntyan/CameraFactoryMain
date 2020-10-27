@@ -107,11 +107,11 @@ public final class InputDataHandler {
         // Machines initialization
         for(int i = 0; i < 5; ++i) {
             Machine calibrator = machineController.createCalibrator(getRandomFromList(dataForTesting.robots));
-            Machine tester = machineController.createTester(getRandomFromList(dataForTesting.robots));
+            //Machine tester = machineController.createTester(getRandomFromList(dataForTesting.robots));
             Machine packer = machineController.createPacker(getRandomFromList(dataForTesting.robots));
 
             System.out.println("CREATED " + calibrator.toString());
-            System.out.println("CREATED " + tester.toString());
+            //System.out.println("CREATED " + tester.toString());
             System.out.println("CREATED " + packer.toString());
         }
     }

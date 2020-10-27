@@ -3,8 +3,6 @@ import controllers.calibration.CalibrationController;
 import controllers.final_stage.FinalStageController;
 import controllers.models.EmployeeController;
 import controllers.models.MachineController;
-import controllers.ordering.OrderController;
-import controllers.testing.TestingController;
 import entities.camera.*;
 import entities.employees.Collector;
 import entities.employees.Employee;
@@ -13,9 +11,7 @@ import entities.employees.Technician;
 import entities.machines.Calibrator;
 import entities.machines.Machine;
 import entities.machines.Packer;
-import entities.machines.Tester;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -44,20 +40,24 @@ public final class ProductLifecycle {
         Integer colorDepth = 10 + rand.nextInt(100);
         CameraBack cameraBack = assembleController.assembleCameraBack(collectorCameraBack, backDimensions,
                 resolutionBack, colorDepth);
-        System.out.println("ASSEMBLED " + cameraBack.toString());
+        System.out.println("ASSEMBLED BY " + collectorCameraBack.getName() + " " +
+                collectorCameraBack.getSurname() + "\n" + cameraBack.toString());
 
         Dimensions bodyDimensions = inputDataHandler.getRandomDimensions();
         String color = inputDataHandler.getRandomColor();
         CameraBody cameraBody = assembleController.assembleCameraBody(collectorCameraBody, bodyDimensions, color);
-        System.out.println("ASSEMBLED " + cameraBody.toString());
+        System.out.println("ASSEMBLED BY " + collectorCameraBody.getName() + " " + collectorCameraBody.getSurname() +
+                "\n" + cameraBody.toString());
 
         Integer focalLength = 10 + rand.nextInt(100);
         LensType lensType = inputDataHandler.getRandomLens();
         CameraLens cameraLens = assembleController.assembleCameraLens(collectorCameraLens, focalLength, lensType);
-        System.out.println("ASSEMBLED " + cameraLens.toString());
+        System.out.println("ASSEMBLED BY " + collectorCameraLens.getName() + " " + collectorCameraLens.getSurname() +
+                "\n" + cameraLens.toString());
 
         Camera camera = assembleController.assembleCamera(collectorCamera, cameraBack, cameraBody, cameraLens);
-        System.out.println("ASSEMBLED " + camera.toString());
+        System.out.println("ASSEMBLED BY " + collectorCamera.getName() + " " + collectorCamera.getSurname() + "\n" +
+                camera.toString());
 
         return camera;
     }
@@ -70,26 +70,9 @@ public final class ProductLifecycle {
 
         CalibrationController calibrationController = new CalibrationController((Calibrator) calibrator);
         Camera newCamera = calibrationController.calibrateCamera(camera);
-        System.out.println("CALIBRATED " + newCamera);
+        System.out.println("CALIBRATED BY " + calibrator.getName() + "\n" + newCamera);
 
         return camera;
-    }
-
-    public Camera testing(Camera camera) {
-        MachineController machineController = new MachineController();
-        EmployeeController employeeController = new EmployeeController();
-
-        List<Tester> testers = machineController.getAllTesters();
-        Machine tester = inputDataHandler.getRandomFromList(testers);
-
-        List<Technician> technicians = employeeController.getAllTechnicians();
-        Employee technician = inputDataHandler.getRandomFromList(technicians);
-
-        TestingController testingController = new TestingController((Tester) tester, (Technician) technician);
-        Camera testedCamera = testingController.test(camera);
-        System.out.println("TESTED " + camera);
-
-        return testedCamera;
     }
 
     public Camera finalStage(Camera camera) {
@@ -108,26 +91,10 @@ public final class ProductLifecycle {
                 new FinalStageController((Technician) technician, (Manager) manager, (Packer) packer);
 
         Camera finalCamera = finalStageController.finalStage(camera);
-        System.out.println("FINAL STAGE " + camera);
+        System.out.println("FINAL STAGE\n" + "MANAGER " + manager.getName() + " " + manager.getSurname() + "\n" +
+                "TECHNICIAN " + technician.getName() + " " + technician.getSurname() + "\n" +
+                "PACKER MACHINE " + packer.getName() + "\n" + finalCamera);
 
         return finalCamera;
-    }
-
-    public void ordering() {
-        EmployeeController employeeController = new EmployeeController();
-
-        List<Manager> managers = employeeController.getAllManagers();
-        Collections.reverse(managers); // From end to begin
-
-        for(Manager manager: managers) {
-            if (manager.getDefects().size() != 0) {
-                OrderController orderController = new OrderController();
-                System.out.println("DEFECTED CAMERAS WAS FOUND " + manager);
-                Manager newManager = orderController.orderDetails(manager);
-                System.out.println("ORDERED " + newManager);
-            }
-        }
-
-        System.out.println("ALL COPIES ARE SERVICEABLE");
     }
 }

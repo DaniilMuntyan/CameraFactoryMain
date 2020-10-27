@@ -5,7 +5,6 @@ import controllers.GlobalVariables;
 import entities.machines.Calibrator;
 import entities.machines.Machine;
 import entities.machines.Packer;
-import entities.machines.Tester;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +23,6 @@ public final class MachineController {
         return this.createMachine(EndPoints.CREATE_PACKER, packer, Packer.class);
     }
 
-    public Tester createTester(String name) {
-        Tester tester = new Tester(name);
-        return this.createMachine(EndPoints.CREATE_TESTER, tester, Tester.class);
-    }
-
     public List<Calibrator> getAllCalibrators() {
         ResponseEntity<List<Calibrator>> responseEntity = GlobalVariables.restTemplate
                 .exchange(EndPoints.GET_ALL_CALIBRATORS, HttpMethod.GET, GlobalVariables.headersEntity,
@@ -40,13 +34,6 @@ public final class MachineController {
         ResponseEntity<List<Packer>> responseEntity = GlobalVariables.restTemplate
                 .exchange(EndPoints.GET_ALL_PACKERS, HttpMethod.GET, GlobalVariables.headersEntity,
                         new ParameterizedTypeReference<List<Packer>>(){});
-        return responseEntity.getBody();
-    }
-
-    public List<Tester> getAllTesters() {
-        ResponseEntity<List<Tester>> responseEntity = GlobalVariables.restTemplate
-                .exchange(EndPoints.GET_ALL_TESTERS, HttpMethod.GET, GlobalVariables.headersEntity,
-                        new ParameterizedTypeReference<List<Tester>>(){});
         return responseEntity.getBody();
     }
 
